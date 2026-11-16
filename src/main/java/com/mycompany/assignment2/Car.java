@@ -33,4 +33,46 @@ public class Car {
         this.y = y;
         this.speed = 0;
     }
+    
+    public String getType() {
+        return type;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+    
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x)
+    {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * used to return a brief description of the car so like "Car #45 (Red)".
+     * @return the description of the car
+     */
+    public String getDescription() {
+        
+        return "Car #" + number + " (" + colorName + ")";
+    }
 }
