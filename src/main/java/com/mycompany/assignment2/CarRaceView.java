@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
 
 /**
  *
@@ -140,6 +141,34 @@ public class CarRaceView {
         Rectangle road = new Rectangle(0, 0, CarRaceModel.TRACK_WIDTH, trackHeight);
         road.setFill(Color.rgb(55, 58, 64)); // GREY FOR ROAD
         track.getChildren().add(road);
+        
+        for (int lane = 1; lane < numberOfLanes; lane++) {
+            
+            double y = lane * CarRaceModel.LANE_HEIGHT;
+
+            for (double x = 10; x < CarRaceModel.TRACK_WIDTH; x += 40) {
+                
+                Line dash = new Line(x, y, x + 20, y);
+                dash.setStroke(Color.WHITE);
+                dash.setStrokeWidth(2);
+                track.getChildren().add(dash);
+            }
+        }
+        
+        double startLineX = CarRaceModel.START_X + CarRaceModel.CAR_LENGTH + 4;
+        
+        Line startLine = new Line(startLineX, 0, startLineX, trackHeight);
+        
+        startLine.setStroke(Color.WHITE);
+        startLine.setStrokeWidth(4);
+        track.getChildren().add(startLine);
+
+        
+        Line finishLine = new Line(CarRaceModel.FINISH_X + 2, 0, CarRaceModel.FINISH_X + 2, trackHeight);
+        
+        finishLine.setStroke(Color.WHITE);
+        finishLine.setStrokeWidth(4);
+        track.getChildren().add(finishLine);
 
         return track;
     }
