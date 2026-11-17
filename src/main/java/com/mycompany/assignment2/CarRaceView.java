@@ -30,6 +30,8 @@ public class CarRaceView {
 
     private Scene slideshowScene;
     
+    private Scene raceScene;
+    
     private ArrayList<VBox> slides = new ArrayList<>();
 
     
@@ -38,6 +40,9 @@ public class CarRaceView {
         this.model = model;
         
         slideshowScene = createSlideshowScene();
+        
+        raceScene = createRaceScene();
+        
     }
     
     private Scene createSlideshowScene() {
@@ -89,6 +94,17 @@ public class CarRaceView {
         return slide;
     }
         
+    private Scene createRaceScene() {
+        
+        VBox root = new VBox(15, createTrack());
+        root.setPadding(new Insets(15));
+        root.setId("race-root");
+
+        Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toString());
+        return scene;
+    }
+        
     private Pane createTrack() {
         
         int numberOfLanes = model.getCars().size();
@@ -108,6 +124,11 @@ public class CarRaceView {
     public Scene getSlideshowScene() {
         
         return slideshowScene;
+    }
+    
+    public Scene getRaceScene() {
+        
+        return raceScene;
     }
     
     public ArrayList<VBox> getSlides() {

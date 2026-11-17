@@ -4,7 +4,12 @@
     -fx-font-size: 11pt;
 }
 
-
+.slide-label {
+    
+    -fx-font-size: 18pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
 
 #slideshow-root {
     
@@ -18,9 +23,6 @@
     -fx-text-fill: gold;
 }
 
-.slide-label {
-    
-    -fx-font-size: 18pt;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
+#race-root {
+    -fx-background-color: #eef2f7;
 }

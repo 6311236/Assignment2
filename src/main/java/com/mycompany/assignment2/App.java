@@ -21,7 +21,7 @@ public class App extends Application {
 
         
         stage.setTitle("Car Race Simulation");
-        stage.setScene(view.getSlideshowScene());
+        stage.setScene(view.getRaceScene());  // Just showing the race screen for now to test it
         stage.show();
         
     }
