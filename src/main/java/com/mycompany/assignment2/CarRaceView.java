@@ -45,7 +45,15 @@ public class CarRaceView {
         root.setId("slideshow-root");
 
         Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toString());
+        
         return scene;
+    }
+    
+    public Scene getSlideshowScene() {
+        
+        return slideshowScene;
     }
     
 }
