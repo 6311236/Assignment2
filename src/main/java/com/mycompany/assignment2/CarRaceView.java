@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.ArrayList;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -24,6 +26,8 @@ public class CarRaceView {
     private CarRaceModel model;
 
     private Scene slideshowScene;
+    
+    private ArrayList<VBox> slides = new ArrayList<>();
 
     
     public CarRaceView(CarRaceModel model) {
@@ -38,9 +42,22 @@ public class CarRaceView {
 
         Label greetingLabel = new Label("Welcome to the Grand Prix of JavaFX!");
         greetingLabel.setId("greeting-label");
+        
+        StackPane slidePane = new StackPane();
+        slidePane.setPrefHeight(380);
+
+        int slideNumber = 1;
+        
+        for (Car car : model.getCars()) {
+            
+            VBox slide = createSlide(car, slideNumber);
+            slides.add(slide);
+            slidePane.getChildren().add(slide);
+            slideNumber++;
+        }
 
         
-        VBox root = new VBox(15, greetingLabel);
+        VBox root = new VBox(15, greetingLabel, slidePane);
         
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
@@ -72,6 +89,11 @@ public class CarRaceView {
     public Scene getSlideshowScene() {
         
         return slideshowScene;
+    }
+    
+    public ArrayList<VBox> getSlides() {
+        
+        return slides;
     }
     
 }
