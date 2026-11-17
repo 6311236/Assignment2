@@ -11,6 +11,18 @@
     -fx-text-fill: white;
 }
 
+.banner {
+    
+    -fx-background-color: #1e3c72;
+}
+
+.banner-letter {
+    
+    -fx-text-fill: white;
+    -fx-font-size: 16pt;
+    -fx-font-weight: bold;
+}
+
 #slideshow-root {
     
     -fx-background-color: #1e3c72;

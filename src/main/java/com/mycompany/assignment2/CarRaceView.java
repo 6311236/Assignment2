@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.HBox;
 
 /**
  *
@@ -96,13 +97,35 @@ public class CarRaceView {
         
     private Scene createRaceScene() {
         
-        VBox root = new VBox(15, createTrack());
+        HBox trackArea = new HBox(createBanner("START"), createTrack(), createBanner("FINISH"));
+
+        
+        VBox root = new VBox(15, trackArea);
+        
         root.setPadding(new Insets(15));
         root.setId("race-root");
 
         Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toString());
         return scene;
+    }
+    
+    private VBox createBanner(String word) {
+        
+        VBox banner = new VBox();
+        
+        banner.setAlignment(Pos.CENTER);
+        banner.setPrefWidth(50);
+        banner.getStyleClass().add("banner");
+
+        for (int i = 0; i < word.length(); i++) {
+            
+            Label letter = new Label(String.valueOf(word.charAt(i)));
+            letter.getStyleClass().add("banner-letter");
+            banner.getChildren().add(letter);
+        }
+
+        return banner;
     }
         
     private Pane createTrack() {
