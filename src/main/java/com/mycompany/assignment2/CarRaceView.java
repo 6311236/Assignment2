@@ -20,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import javafx.scene.Group;
 import javafx.scene.shape.Polygon;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -37,8 +38,9 @@ public class CarRaceView {
     private Scene raceScene;
     
     private ArrayList<VBox> slides = new ArrayList<>();
-
     
+    private ArrayList<Group> carNodes = new ArrayList<>();
+
     public CarRaceView(CarRaceModel model) {
         
         this.model = model;
@@ -171,6 +173,13 @@ public class CarRaceView {
         finishLine.setStroke(Color.WHITE);
         finishLine.setStrokeWidth(4);
         track.getChildren().add(finishLine);
+        
+        for (Car car : model.getCars()) {
+            
+            Group carNode = createCar(car);
+            carNodes.add(carNode);
+            track.getChildren().add(carNode);
+        }
 
         return track;
     }
@@ -200,9 +209,22 @@ public class CarRaceView {
         
         roof.setFill(car.getColor());
         roof.setStroke(Color.BLACK);
+        
+        Rectangle backWindow = new Rectangle(43, 9, 16, 11);
+        backWindow.setFill(Color.LIGHTSKYBLUE);
+        Rectangle frontWindow = new Rectangle(62, 9, 15, 11);
+        frontWindow.setFill(Color.LIGHTSKYBLUE);
+
+        // WHITE PLATE W CAR NUMBER
+        
+        Rectangle plate = new Rectangle(46, 24, 28, 15);
+        plate.setFill(Color.WHITE);
+        Text numberText = new Text(57, 36, String.valueOf(car.getNumber()));
+        numberText.getStyleClass().add("car-number");
 
         
-        Group carNode = new Group(body, roof);
+        Group carNode = new Group(body, roof, backWindow, frontWindow, plate, numberText);
+        
         carNode.setLayoutX(car.getX());
         carNode.setLayoutY(car.getY());
 
@@ -217,6 +239,11 @@ public class CarRaceView {
     public Scene getRaceScene() {
         
         return raceScene;
+    }
+    
+    public ArrayList<Group> getCarNodes() {
+        
+        return carNodes;
     }
     
     public ArrayList<VBox> getSlides() {

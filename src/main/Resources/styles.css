@@ -23,6 +23,12 @@
     -fx-font-weight: bold;
 }
 
+.car-number {
+    
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
 #slideshow-root {
     
     -fx-background-color: #1e3c72;
