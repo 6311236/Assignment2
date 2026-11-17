@@ -18,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
+import javafx.scene.Group;
+import javafx.scene.shape.Polygon;
 
 /**
  *
@@ -171,6 +173,40 @@ public class CarRaceView {
         track.getChildren().add(finishLine);
 
         return track;
+    }
+    
+    
+    private Group createCar(Car car) {
+        
+        // BODY
+        
+        Polygon body = new Polygon(0.0, 26.0,    // the back, top
+                                   28.0, 20.0,     // the back of the roof
+                                   92.0, 20.0,    // the front of the roof
+                                   114.0, 26.0,  // the hood
+                                   120.0, 32.0,  // the front bumper, top
+                                   120.0, 42.0,   // the front bumper, bottom
+                                   0.0, 42.0);     // the back bumper, bottom
+        
+        body.setFill(car.getColor());
+        body.setStroke(Color.BLACK);
+
+        // TOP/ROOF
+        
+        Polygon roof = new Polygon(30.0, 20.0,
+                                   42.0, 6.0,
+                                   78.0, 6.0,
+                                   92.0, 20.0);
+        
+        roof.setFill(car.getColor());
+        roof.setStroke(Color.BLACK);
+
+        
+        Group carNode = new Group(body, roof);
+        carNode.setLayoutX(car.getX());
+        carNode.setLayoutY(car.getY());
+
+        return carNode;
     }
     
     public Scene getSlideshowScene() {
