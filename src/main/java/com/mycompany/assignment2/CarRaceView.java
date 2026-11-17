@@ -9,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -49,6 +51,22 @@ public class CarRaceView {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toString());
         
         return scene;
+    }
+    
+        private VBox createSlide(Car car, int slideNumber) {
+            
+        // ALL MY PNGS FOR THE CAR DONT FORGET .PNG AFT
+        
+        Image image = new Image(getClass().getResource("/images/car" + slideNumber + ".png").toString());
+        ImageView imageView = new ImageView(image);
+
+        Label carLabel = new Label(car.getDescription() + " - " + car.getType());
+        carLabel.getStyleClass().add("slide-label");
+
+        VBox slide = new VBox(15, imageView, carLabel);
+        slide.setAlignment(Pos.CENTER);
+
+        return slide;
     }
     
     public Scene getSlideshowScene() {
