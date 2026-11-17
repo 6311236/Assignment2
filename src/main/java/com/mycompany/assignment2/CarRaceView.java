@@ -13,6 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -84,6 +87,22 @@ public class CarRaceView {
         slide.setAlignment(Pos.CENTER);
 
         return slide;
+    }
+        
+    private Pane createTrack() {
+        
+        int numberOfLanes = model.getCars().size();
+        double trackHeight = numberOfLanes * CarRaceModel.LANE_HEIGHT;
+
+        Pane track = new Pane();
+        track.setPrefSize(CarRaceModel.TRACK_WIDTH, trackHeight);
+
+        
+        Rectangle road = new Rectangle(0, 0, CarRaceModel.TRACK_WIDTH, trackHeight);
+        road.setFill(Color.rgb(55, 58, 64)); // GREY FOR ROAD
+        track.getChildren().add(road);
+
+        return track;
     }
     
     public Scene getSlideshowScene() {
