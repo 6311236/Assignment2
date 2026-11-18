@@ -33,6 +33,8 @@ public class CarRaceView {
     
     private static final double SCENE_WIDTH = 1030.0;
     private static final double SCENE_HEIGHT = 550.0;
+    
+    private static final String[] PLACES = {"1st", "2nd", "3rd", "4th"};
 
     private CarRaceModel model;
 
@@ -347,6 +349,26 @@ public class CarRaceView {
         
         titleLabel.setText("Race in Progress...");
         messageLabel.setText("The cars are racing to the finish line");
+    }
+    
+    public void showResults(Car winner, ArrayList<Car> finishOrder) {
+        
+        titleLabel.setText("Race Over!");
+        messageLabel.setText("Congratulations to " + winner.getDescription() + ", the winner of the race!");
+
+        resultsBox.getChildren().clear();
+        Label resultsTitle = new Label("Final Standings:");
+        resultsTitle.getStyleClass().add("results-title");
+        resultsBox.getChildren().add(resultsTitle);
+
+        for (int i = 0; i < finishOrder.size(); i++) {
+            
+            Label resultLabel = new Label(PLACES[i] + "   " + finishOrder.get(i).getDescription());
+            resultLabel.getStyleClass().add("result-label");
+            resultsBox.getChildren().add(resultLabel);
+        }
+
+        infoLabel.setText("Animations used: TranslateTransition (cars), " + "RotateTransition (wheels), FadeTransition (slideshow).");
     }
     
     public Scene getSlideshowScene() {

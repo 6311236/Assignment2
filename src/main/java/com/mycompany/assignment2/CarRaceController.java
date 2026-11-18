@@ -167,6 +167,13 @@ public class CarRaceController {
     private void carFinished(Car car) {
         
         model.addFinisher(car);
+
+        if (model.isRaceOver()) {
+            
+            view.showResults(model.getWinner(), model.getFinishOrder());
+
+            view.getStartButton().setDisable(true);
+        }
     }
     
 }

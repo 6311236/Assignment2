@@ -36,6 +36,16 @@
     -fx-border-radius: 8;
 }
 
+.results-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+.result-label {
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+}
+
 #start-button {
     -fx-background-color: #2e7d32;
     -fx-text-fill: white;
