@@ -61,10 +61,29 @@ public class CarRaceModel {
     public void addFinisher(Car car) {
         
         finishOrder.add(car);
+    }
+
+    public Car getWinner() {
+        
+        return finishOrder.get(0);
+    }
+
+    /**
+     * Returns true when every car crossed the finish line.
+     *
+     * @return true if the race is over
+     */
+    public boolean isRaceOver() {
+        
+        return finishOrder.size() == cars.size();
     }    
 
     public ArrayList<Car> getCars() {
         return cars;
     }
     
+    public ArrayList<Car> getFinishOrder() {
+        
+        return finishOrder;
+    }
 }
