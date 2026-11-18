@@ -22,6 +22,7 @@ import javafx.scene.Group;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.scene.shape.Circle;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -43,6 +44,10 @@ public class CarRaceView {
     private ArrayList<Group> carNodes = new ArrayList<>();
     
     private ArrayList<Group> wheelNodes = new ArrayList<>();
+    
+    private Button startButton;
+    private Button pauseButton;
+    private Button resetButton;
 
     public CarRaceView(CarRaceModel model) {
         
@@ -108,7 +113,9 @@ public class CarRaceView {
         HBox trackArea = new HBox(createBanner("START"), createTrack(), createBanner("FINISH"));
 
         
-        VBox root = new VBox(15, trackArea);
+        HBox bottomArea = new HBox(15, createControlBox());
+
+        VBox root = new VBox(15, trackArea, bottomArea);
         
         root.setPadding(new Insets(15));
         root.setId("race-root");
@@ -255,6 +262,31 @@ public class CarRaceView {
         spoke.setStrokeWidth(2);
 
         return new Group(tire, spoke);
+    }
+    
+    private VBox createControlBox() {
+        
+        startButton = new Button("Start");
+        startButton.setId("start-button");
+        startButton.setPrefSize(110, 38);
+        
+        pauseButton = new Button("Pause");
+        pauseButton.setId("pause-button");
+        pauseButton.setPrefSize(110, 38);
+        
+        resetButton = new Button("Reset");
+        resetButton.setId("reset-button");
+        resetButton.setPrefSize(110, 38);
+
+        HBox buttonBox = new HBox(15, startButton, pauseButton, resetButton);
+
+        VBox controlBox = new VBox(20, buttonBox);
+        
+        controlBox.setPadding(new Insets(15));
+        controlBox.setPrefWidth(440);
+        controlBox.getStyleClass().add("panel");
+
+        return controlBox;
     }
     
     public Scene getSlideshowScene() {

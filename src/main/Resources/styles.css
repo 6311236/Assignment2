@@ -29,6 +29,34 @@
     -fx-font-weight: bold;
 }
 
+.panel {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-color: #c5d3e8;
+    -fx-border-radius: 8;
+}
+
+#start-button {
+    -fx-background-color: #2e7d32;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+
+#pause-button {
+    -fx-background-color: #1565c0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+
+#reset-button {
+    -fx-background-color: #e53935;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+}
+
 #slideshow-root {
     
     -fx-background-color: #1e3c72;
