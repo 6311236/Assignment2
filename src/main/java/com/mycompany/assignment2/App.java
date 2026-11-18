@@ -18,6 +18,7 @@ public class App extends Application {
         
         CarRaceModel model = new CarRaceModel();
         CarRaceView view = new CarRaceView(model);
+        CarRaceController controller = new CarRaceController(model, view, stage);
 
         
         stage.setTitle("Car Race Simulation");
