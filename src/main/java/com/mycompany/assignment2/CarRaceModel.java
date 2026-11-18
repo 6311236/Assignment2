@@ -49,6 +49,11 @@ public class CarRaceModel {
     private double laneY(int lane) {
         
         return lane * LANE_HEIGHT + 6;
+    }
+
+    public double getRaceDistance() {
+        
+        return FINISH_X - START_X - CAR_LENGTH;
     }    
 
     public ArrayList<Car> getCars() {

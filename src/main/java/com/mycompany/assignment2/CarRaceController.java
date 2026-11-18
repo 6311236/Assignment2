@@ -9,6 +9,9 @@ import javafx.animation.FadeTransition;
 import javafx.animation.SequentialTransition;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import java.util.ArrayList;
+import javafx.animation.TranslateTransition;
+import javafx.scene.Group;
 
 /**
  *
@@ -22,6 +25,8 @@ public class CarRaceController {
     private CarRaceModel model;
     private CarRaceView view;
     private Stage stage;
+    
+    private ArrayList<TranslateTransition> carAnimations = new ArrayList<>();
 
     /**
      * Creates the controller and registers all the event handlers.
@@ -72,6 +77,31 @@ public class CarRaceController {
     private void showRace() {
         
         stage.setScene(view.getRaceScene());
+    }
+    
+    private void createAnimations() {
+        
+        ArrayList<Car> cars = model.getCars();
+        double distance = model.getRaceDistance();
+
+        for (int i = 0; i < cars.size(); i++) {
+            
+            Car car = cars.get(i);
+            Group carNode = view.getCarNodes().get(i);
+
+            // TIME CAR WILL TAKE DEPENDING ON ITS ACT SPEED
+            
+            double seconds = distance / car.getSpeed();
+
+            // MOVES CAR FROM START TO FINISH
+            
+            TranslateTransition move = new TranslateTransition(Duration.seconds(seconds), carNode);
+            
+            move.setFromX(0);
+            move.setToX(distance);
+
+            carAnimations.add(move);
+        }
     }
     
 }
