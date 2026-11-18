@@ -21,6 +21,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.Group;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
+import javafx.scene.shape.Circle;
 
 /**
  *
@@ -40,6 +41,8 @@ public class CarRaceView {
     private ArrayList<VBox> slides = new ArrayList<>();
     
     private ArrayList<Group> carNodes = new ArrayList<>();
+    
+    private ArrayList<Group> wheelNodes = new ArrayList<>();
 
     public CarRaceView(CarRaceModel model) {
         
@@ -221,14 +224,37 @@ public class CarRaceView {
         plate.setFill(Color.WHITE);
         Text numberText = new Text(57, 36, String.valueOf(car.getNumber()));
         numberText.getStyleClass().add("car-number");
+        
+        // WHEELS OF THE CAR
+        
+        Group backWheel = createWheel(28, 42);
+        Group frontWheel = createWheel(92, 42);
+        wheelNodes.add(backWheel);
+        wheelNodes.add(frontWheel);
 
         
-        Group carNode = new Group(body, roof, backWindow, frontWindow, plate, numberText);
+        Group carNode = new Group(body, roof, backWindow, frontWindow, plate, numberText, backWheel, frontWheel);;
         
         carNode.setLayoutX(car.getX());
         carNode.setLayoutY(car.getY());
 
         return carNode;
+    }
+    
+    private Group createWheel(double centerX, double centerY) {
+        
+        final double RADIUS = 10.0;
+
+        Circle tire = new Circle(centerX, centerY, RADIUS);
+        tire.setFill(Color.LIGHTGRAY);
+        tire.setStroke(Color.rgb(30, 30, 30));
+        tire.setStrokeWidth(4);
+
+        Line spoke = new Line(centerX, centerY, centerX + RADIUS - 2, centerY);
+        spoke.setStroke(Color.rgb(30, 30, 30));
+        spoke.setStrokeWidth(2);
+
+        return new Group(tire, spoke);
     }
     
     public Scene getSlideshowScene() {
@@ -244,6 +270,11 @@ public class CarRaceView {
     public ArrayList<Group> getCarNodes() {
         
         return carNodes;
+    }
+    
+    public ArrayList<Group> getWheelNodes() {
+        
+        return wheelNodes;
     }
     
     public ArrayList<VBox> getSlides() {
