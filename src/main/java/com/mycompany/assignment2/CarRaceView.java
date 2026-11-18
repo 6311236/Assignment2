@@ -23,6 +23,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 
 /**
  *
@@ -48,6 +49,14 @@ public class CarRaceView {
     private Button startButton;
     private Button pauseButton;
     private Button resetButton;
+    
+    private Slider speedSlider;
+    private Label speedLabel;
+    
+    private Label titleLabel;
+    private Label messageLabel;
+    private VBox resultsBox;
+    private Label infoLabel;
 
     public CarRaceView(CarRaceModel model) {
         
@@ -113,7 +122,7 @@ public class CarRaceView {
         HBox trackArea = new HBox(createBanner("START"), createTrack(), createBanner("FINISH"));
 
         
-        HBox bottomArea = new HBox(15, createControlBox());
+        HBox bottomArea = new HBox(15, createControlBox(), createMessageBox());
 
         VBox root = new VBox(15, trackArea, bottomArea);
         
@@ -279,14 +288,47 @@ public class CarRaceView {
         resetButton.setPrefSize(110, 38);
 
         HBox buttonBox = new HBox(15, startButton, pauseButton, resetButton);
+        
+        Label sliderLabel = new Label("Race Speed:");
+        speedSlider = new Slider(0.5, 3.0, 1.0);
+        speedSlider.setPrefWidth(180);
+        speedLabel = new Label("1.0x");
+        speedLabel.setId("speed-label");
 
-        VBox controlBox = new VBox(20, buttonBox);
+        HBox sliderBox = new HBox(10, sliderLabel, speedSlider, speedLabel);
+        sliderBox.setAlignment(Pos.CENTER_LEFT);
+
+        VBox controlBox = new VBox(20, buttonBox, sliderBox);
         
         controlBox.setPadding(new Insets(15));
         controlBox.setPrefWidth(440);
         controlBox.getStyleClass().add("panel");
 
         return controlBox;
+    }
+    
+    private VBox createMessageBox() {
+        
+        titleLabel = new Label();
+        titleLabel.setId("title-label");
+        
+        messageLabel = new Label();
+        messageLabel.setId("message-label");
+        
+        resultsBox = new VBox(2);
+        
+        infoLabel = new Label();
+        infoLabel.setId("info-label");
+        infoLabel.setWrapText(true);
+
+        VBox messageBox = new VBox(6, titleLabel, messageLabel, resultsBox, infoLabel);
+        
+        messageBox.setPadding(new Insets(12));
+        messageBox.setPrefWidth(545);
+        messageBox.setPrefHeight(230);
+        messageBox.getStyleClass().add("panel");
+
+        return messageBox;
     }
     
     public Scene getSlideshowScene() {
