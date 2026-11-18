@@ -12,6 +12,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 
 /**
  *
@@ -21,12 +24,14 @@ public class CarRaceController {
     
     private static final double FADE_TIME = 800; // IN MILLISECONDS BOTH
     private static final double DISPLAY_TIME = 2500;
+    private static final double WHEEL_TURN_TIME = 400;
     
     private CarRaceModel model;
     private CarRaceView view;
     private Stage stage;
     
     private ArrayList<TranslateTransition> carAnimations = new ArrayList<>();
+    private ArrayList<RotateTransition> wheelAnimations = new ArrayList<>();
     
     private boolean raceStarted = false;
 
@@ -106,9 +111,29 @@ public class CarRaceController {
             
             move.setFromX(0);
             move.setToX(distance);
+            
+            // SPIN BOTH WHEELS OF CAR
+            
+            RotateTransition backSpin = createWheelAnimation(view.getWheelNodes().get(i * 2));
+            RotateTransition frontSpin = createWheelAnimation(view.getWheelNodes().get(i * 2 + 1));
 
             carAnimations.add(move);
+    
+            wheelAnimations.add(backSpin);
+            wheelAnimations.add(frontSpin);
         }
+    }
+    
+    private RotateTransition createWheelAnimation(Group wheel) {
+        
+        RotateTransition spin = new RotateTransition(new Duration(WHEEL_TURN_TIME), wheel);
+        
+        spin.setByAngle(360);
+        spin.setCycleCount(Animation.INDEFINITE);
+
+       
+        spin.setInterpolator(Interpolator.LINEAR);
+        return spin;
     }
     
     private void startRace() {
@@ -122,6 +147,11 @@ public class CarRaceController {
         for (TranslateTransition move : carAnimations) {
             
             move.play();
+        }
+        
+        for (RotateTransition spin : wheelAnimations) {
+            
+            spin.play();
         }
 
         view.showProgressMessage();
