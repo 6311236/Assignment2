@@ -60,8 +60,18 @@ public class CarRaceController {
 
             slideshow.getChildren().addAll(fadeIn, fadeOut);
         }
+        
+        slideshow.setOnFinished(e ->
+                {
+            showRace();
+        });
 
         slideshow.play();
+    }
+    
+    private void showRace() {
+        
+        stage.setScene(view.getRaceScene());
     }
     
 }

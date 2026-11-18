@@ -85,6 +85,8 @@ public class CarRaceView {
             slides.add(slide);
             slidePane.getChildren().add(slide);
             slideNumber++;
+            
+            slide.setOpacity(0);
         }
 
         
