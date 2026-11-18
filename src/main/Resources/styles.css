@@ -77,3 +77,21 @@
     
     -fx-font-weight: bold;
 }
+
+#title-label {
+    
+    -fx-font-size: 15pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3c72;
+}
+
+#message-label {
+    
+    -fx-font-weight: bold;
+}
+
+#info-label {
+    
+    -fx-font-style: italic;
+    -fx-text-fill: #555555;
+}

@@ -327,8 +327,18 @@ public class CarRaceView {
         messageBox.setPrefWidth(545);
         messageBox.setPrefHeight(230);
         messageBox.getStyleClass().add("panel");
+        
+        showReadyMessage();
 
         return messageBox;
+    }
+    
+    public void showReadyMessage() {
+        
+        titleLabel.setText("Ready to Race!");
+        messageLabel.setText("Press Start to begin the race.");
+        resultsBox.getChildren().clear();
+        infoLabel.setText("");
     }
     
     public Scene getSlideshowScene() {
