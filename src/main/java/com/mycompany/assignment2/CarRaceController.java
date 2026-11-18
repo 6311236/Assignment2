@@ -116,6 +116,13 @@ public class CarRaceController {
             
             RotateTransition backSpin = createWheelAnimation(view.getWheelNodes().get(i * 2));
             RotateTransition frontSpin = createWheelAnimation(view.getWheelNodes().get(i * 2 + 1));
+            
+            move.setOnFinished(e ->
+            {
+                backSpin.stop();
+                frontSpin.stop();
+                carFinished(car);
+            });
 
             carAnimations.add(move);
     
@@ -155,6 +162,11 @@ public class CarRaceController {
         }
 
         view.showProgressMessage();
+    }
+    
+    private void carFinished(Car car) {
+        
+        model.addFinisher(car);
     }
     
 }

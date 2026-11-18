@@ -28,6 +28,8 @@ public class CarRaceModel {
 
     private ArrayList<Car> cars = new ArrayList<>();
     
+    private ArrayList<Car> finishOrder = new ArrayList<>();
+    
     /**
      * Creates the model with 4 cars and each in its own lane. The colors match the pictures of the cars that were first shown in the slideshow
      */
@@ -54,6 +56,11 @@ public class CarRaceModel {
     public double getRaceDistance() {
         
         return FINISH_X - START_X - CAR_LENGTH;
+    }
+
+    public void addFinisher(Car car) {
+        
+        finishOrder.add(car);
     }    
 
     public ArrayList<Car> getCars() {
