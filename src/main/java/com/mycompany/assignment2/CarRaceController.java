@@ -27,6 +27,8 @@ public class CarRaceController {
     private Stage stage;
     
     private ArrayList<TranslateTransition> carAnimations = new ArrayList<>();
+    
+    private boolean raceStarted = false;
 
     /**
      * Creates the controller and registers all the event handlers.
@@ -40,6 +42,11 @@ public class CarRaceController {
         this.model = model;
         this.view = view;
         this.stage = stage;
+        
+        view.getStartButton().setOnAction(e ->
+        {
+            startRace();
+        });
     }
     
     public void startSlideshow() {
@@ -102,6 +109,22 @@ public class CarRaceController {
 
             carAnimations.add(move);
         }
+    }
+    
+    private void startRace() {
+        
+        if (!raceStarted) {
+            
+            createAnimations();
+            raceStarted = true;
+        }
+
+        for (TranslateTransition move : carAnimations) {
+            
+            move.play();
+        }
+
+        view.showProgressMessage();
     }
     
 }

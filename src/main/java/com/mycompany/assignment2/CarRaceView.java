@@ -343,6 +343,12 @@ public class CarRaceView {
         infoLabel.setText("");
     }
     
+    public void showProgressMessage() {
+        
+        titleLabel.setText("Race in Progress...");
+        messageLabel.setText("The cars are racing to the finish line");
+    }
+    
     public Scene getSlideshowScene() {
         
         return slideshowScene;
@@ -361,6 +367,11 @@ public class CarRaceView {
     public ArrayList<Group> getWheelNodes() {
         
         return wheelNodes;
+    }
+    
+    public Button getStartButton() {
+        
+        return startButton;
     }
     
     public ArrayList<VBox> getSlides() {
