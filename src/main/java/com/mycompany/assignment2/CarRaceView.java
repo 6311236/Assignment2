@@ -371,6 +371,11 @@ public class CarRaceView {
         infoLabel.setText("Animations used: TranslateTransition (cars), " + "RotateTransition (wheels), FadeTransition (slideshow).");
     }
     
+    public void showSpeed(double speed) {
+        
+        speedLabel.setText(String.format("%.1fx", speed));
+    }
+    
     public Scene getSlideshowScene() {
         
         return slideshowScene;
@@ -404,6 +409,11 @@ public class CarRaceView {
     public Button getResetButton() {
         
         return resetButton;
+    }
+    
+    public Slider getSpeedSlider() {
+        
+        return speedSlider;
     }
     
     public ArrayList<VBox> getSlides() {

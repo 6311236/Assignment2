@@ -62,6 +62,12 @@ public class CarRaceController {
         {
             resetRace();
         });
+        
+        view.getSpeedSlider().valueProperty().addListener(
+            (observable, oldValue, newValue) ->
+            {
+                changeSpeed(view.getSpeedSlider().getValue());
+            });
     }
     
     public void startSlideshow() {
@@ -122,6 +128,8 @@ public class CarRaceController {
             move.setFromX(0);
             move.setToX(distance);
             
+            move.setRate(view.getSpeedSlider().getValue());
+            
             // SPIN BOTH WHEELS OF CAR
             
             RotateTransition backSpin = createWheelAnimation(view.getWheelNodes().get(i * 2));
@@ -150,6 +158,9 @@ public class CarRaceController {
 
        
         spin.setInterpolator(Interpolator.LINEAR);
+        
+        spin.setRate(view.getSpeedSlider().getValue());
+        
         return spin;
     }
     
@@ -206,6 +217,21 @@ public class CarRaceController {
         carAnimations.clear();
         wheelAnimations.clear();
         raceStarted = false;
+        
+        for (Group carNode : view.getCarNodes()) {
+            
+            carNode.setTranslateX(0);
+        }
+
+        for (Group wheel : view.getWheelNodes()) {
+            
+            wheel.setRotate(0);
+        }
+
+        model.reset();
+
+        view.getStartButton().setDisable(false);
+        view.showReadyMessage();
     }
     
     private void carFinished(Car car) {
@@ -218,6 +244,21 @@ public class CarRaceController {
 
             view.getStartButton().setDisable(true);
         }
+    }
+    
+    private void changeSpeed(double speed) {
+        
+        for (TranslateTransition move : carAnimations) {
+            
+            move.setRate(speed);
+        }
+
+        for (RotateTransition spin : wheelAnimations) {
+            
+            spin.setRate(speed);
+        }
+
+        view.showSpeed(speed);
     }
     
 }
