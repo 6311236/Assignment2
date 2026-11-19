@@ -396,6 +396,16 @@ public class CarRaceView {
         return startButton;
     }
     
+    public Button getPauseButton() {
+        
+        return pauseButton;
+    }
+    
+    public Button getResetButton() {
+        
+        return resetButton;
+    }
+    
     public ArrayList<VBox> getSlides() {
         
         return slides;

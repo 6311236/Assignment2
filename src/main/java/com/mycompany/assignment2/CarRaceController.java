@@ -52,6 +52,16 @@ public class CarRaceController {
         {
             startRace();
         });
+        
+        view.getPauseButton().setOnAction(e ->
+        {
+            pauseRace();
+        });
+        
+        view.getResetButton().setOnAction(e ->
+        {
+            resetRace();
+        });
     }
     
     public void startSlideshow() {
@@ -156,12 +166,46 @@ public class CarRaceController {
             move.play();
         }
         
-        for (RotateTransition spin : wheelAnimations) {
+        for (int i = 0; i < carAnimations.size(); i++) {
             
-            spin.play();
+            if (!model.getFinishOrder().contains(model.getCars().get(i))) {
+                
+                wheelAnimations.get(i * 2).play();
+                wheelAnimations.get(i * 2 + 1).play();
+            }
         }
 
         view.showProgressMessage();
+    }
+    
+    private void pauseRace() {
+        
+        for (TranslateTransition move : carAnimations) {
+            
+            move.pause();
+        }
+
+        for (RotateTransition spin : wheelAnimations) {
+            
+            spin.pause();
+        }
+    }
+    
+    private void resetRace() {
+        
+        for (TranslateTransition move : carAnimations) {
+            
+            move.stop();
+        }
+
+        for (RotateTransition spin : wheelAnimations) {
+            
+            spin.stop();
+        }
+
+        carAnimations.clear();
+        wheelAnimations.clear();
+        raceStarted = false;
     }
     
     private void carFinished(Car car) {

@@ -52,6 +52,16 @@ public class CarRaceModel {
         
         return lane * LANE_HEIGHT + 6;
     }
+    
+    public void reset() {
+        
+        for (Car car : cars) {
+            
+            car.setX(START_X);
+        }
+
+        finishOrder.clear();
+    }
 
     public double getRaceDistance() {
         
