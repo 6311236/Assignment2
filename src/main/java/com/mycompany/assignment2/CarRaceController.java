@@ -68,6 +68,20 @@ public class CarRaceController {
             {
                 changeSpeed(view.getSpeedSlider().getValue());
             });
+        
+        ArrayList<Car> cars = model.getCars();
+        
+        for (int i = 0; i < cars.size(); i++) {
+            
+            Car car = cars.get(i);
+            Group carNode = view.getCarNodes().get(i);
+
+            carNode.translateXProperty().addListener(
+                (observable, oldValue, newValue) ->
+                {
+                    model.updateCarPosition(car, CarRaceModel.START_X + carNode.getTranslateX());
+                });
+        }
     }
     
     public void startSlideshow() {

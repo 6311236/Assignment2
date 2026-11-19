@@ -68,6 +68,11 @@ public class CarRaceModel {
         return FINISH_X - START_X - CAR_LENGTH;
     }
 
+    public void updateCarPosition(Car car, double x) {
+        
+        car.setX(x);
+    }
+    
     public void addFinisher(Car car) {
         
         finishOrder.add(car);
