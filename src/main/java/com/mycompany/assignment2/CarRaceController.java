@@ -15,12 +15,16 @@ import javafx.scene.Group;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  *
  * @author antho
  */
 public class CarRaceController {
+    
+    private static final String SOUND_FILE = "/sounds/slideshow.mp3";
     
     private static final double FADE_TIME = 800; // IN MILLISECONDS BOTH
     private static final double DISPLAY_TIME = 2500;
@@ -29,6 +33,8 @@ public class CarRaceController {
     private CarRaceModel model;
     private CarRaceView view;
     private Stage stage;
+    
+    private MediaPlayer musicPlayer;
     
     private ArrayList<TranslateTransition> carAnimations = new ArrayList<>();
     private ArrayList<RotateTransition> wheelAnimations = new ArrayList<>();
@@ -113,11 +119,23 @@ public class CarRaceController {
             showRace();
         });
 
+        playSound();
         slideshow.play();
+    }
+
+   
+    private void playSound() {
+        
+        Media media = new Media(getClass().getResource(SOUND_FILE).toExternalForm());
+        
+        musicPlayer = new MediaPlayer(media);
+        musicPlayer.setAutoPlay(true);
+    
     }
     
     private void showRace() {
         
+        musicPlayer.stop();
         stage.setScene(view.getRaceScene());
     }
     
